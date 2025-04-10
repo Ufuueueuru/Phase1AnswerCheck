@@ -1,12 +1,58 @@
 <!DOCTYPE html>
 <html>
   <head>
-  	<title>Riddle Hasher</title>
+  	<title>Phase 1 Answer Checker</title>
+    
+    <style>
+      body {
+        text-align: center;
+        background-color: black;
+        color: white;
+        font-family: "Tahoma";
+        text-size: 24;
+        word-spacing: 8px;
+      }
+      
+      div {
+        width: 650px;
+        line-height: 50px;
+        background: 
+          linear-gradient(
+            rgba(0, 0, 0, 0.7), 
+            rgba(0, 0, 0, 0.7)
+          ),
+          /* bottom, image */
+          URL("https://sundevilgaming.com/wp-content/uploads/2024/05/Artboard-1.png");
+        //background-image: URL("https://sundevilgaming.com/wp-content/uploads/2024/05/Artboard-1.png");
+        background-size: cover;
+        margin: 0 auto;
+      }
+      
+      input {
+        font-size: 25px;
+        text-align: center;
+        font-family: "Tohama";
+        background-color: black;
+        color: white;
+        padding: 8px;
+        margin: 8px;
+        border: 2px solid grey;
+      }
+    </style>
   </head>
   <body>
 
-    <h1>Rough Hasher</h1>
+    <div>
+      <h2>
+        ----------------------------------------------------------------<br>
+        Etched into the script of time are the legends of heroes and villains, alive or dead, trailblazing as their names are called again and again.  Myriad stories tell tales of their ability, and yet among them lies the Nigh Unspoken, harboring feats shadowed behind steel key.  Shall we recount this forgotten warrior together?  Who amongst you will join me in their exultation?<br>
+        ----------------------------------------------------------------
+        <br><br>
+        Write their name, and the secrets shall be revealed:
+      </h2>
+    </div>
     <input id="input">
+    <br>
     <button onclick="getResult()">Get result</button>
 	<p id="result">--Result--</p>
     <p>Test guess with resulting string ^^</p>
@@ -31,6 +77,12 @@
       
       let testInput = document.getElementById("testInput");
       let guessResult = document.getElementById("guessResult");
+      
+      testInput.addEventListener("keydown", ({key}) => {
+        if (key === "Enter") {
+          testResult();
+        }
+      })
       
       function getResult() {
       	(async () => {
