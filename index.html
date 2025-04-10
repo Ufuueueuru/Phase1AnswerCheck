@@ -13,6 +13,10 @@
         word-spacing: 8px;
       }
       
+      p {
+      	font-size: 24px;
+      }
+      
       div {
         width: 650px;
         line-height: 50px;
@@ -31,12 +35,21 @@
       input {
         font-size: 25px;
         text-align: center;
-        font-family: "Tohama";
+        font-family: "Tahoma";
         background-color: black;
         color: white;
         padding: 8px;
         margin: 8px;
         border: 2px solid grey;
+      }
+      
+      button {
+        background-color: black;
+        border: 2px solid grey;
+        color: rgb(250, 240, 240);
+        font-family: "Tahoma";
+        font-size: 20px;
+        cursor: pointer;
       }
     </style>
   </head>
@@ -55,10 +68,10 @@
     <br>
     <button onclick="getResult()">Get result</button>
 	<p id="result">--Result--</p>
-    <p>Test guess with resulting string ^^</p>
+    <p>Test guess \/ with resulting string ^^</p>
     <input id="testInput">
     <br>
-    <button onclick="testResult()">Test result</button>
+    <button onclick="testResult()">Reveal</button>
     <p id="guessResult"></p>
 
     <script>
@@ -95,7 +108,14 @@
       	(async () => {
         	let hash = await getSHA256Hash(testInput.value.toLowerCase().trim() + "hsa.ocruhoasetnub-");
             guessResult.innerHTML = (outputResult.innerHTML === hash ? "Guess is correct!" : "Guess is INCORRECT");
-        })()
+            guessResult.scrollIntoView({behavior: "smooth"});
+            let fun = async (e) => {
+              guessResult.style.webkitFilter = "blur(" + e + "px)";
+              if (e > 0)
+                setTimeout(fun.bind(null, e-1), 50);
+            }
+            fun(5);
+        })();
       }
     </script>
 
