@@ -41,7 +41,7 @@
       
       function testResult() {
       	(async () => {
-        	let hash = await getSHA256Hash(inputButton.value.toLowerCase().trim() + "hsa.ocruhoasetnub-");
+        	let hash = await getSHA256Hash(testInput.value.toLowerCase().trim() + "hsa.ocruhoasetnub-");
             guessResult.innerHTML = (outputResult.innerHTML === hash ? "Guess is correct!" : "Guess is INCORRECT");
         })()
       }
