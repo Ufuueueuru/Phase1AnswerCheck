@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>Riddle Hasher</title>
+  </head>
+  <body>
+
+    <h1>Rough Hasher</h1>
+    <input id="input">
+    <button onclick="getResult()">Get result</button>
+	<p id="result">--Result--</p>
+    <p>Test guess with resulting string ^^</p>
+    <input id="testInput">
+    <br>
+    <button onclick="testResult()">Test result</button>
+    <p id="guessResult"></p>
+
+    <script>
+      const getSHA256Hash = async (input) => {
+        const textAsBuffer = new TextEncoder().encode(input);
+        const hashBuffer = await window.crypto.subtle.digest("SHA-256", textAsBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hash = hashArray
+            .map((item) => item.toString(16).padStart(2, "0"))
+            .join("");
+          return hash;
+      };
+      
+      let inputButton = document.getElementById("input");
+      let outputResult = document.getElementById("result");
+      
+      let testInput = document.getElementById("testInput");
+      let guessResult = document.getElementById("guessResult");
+      
+      function getResult() {
+      	(async () => {
+        	let hash = await getSHA256Hash(inputButton.value.toLowerCase().trim() + "hsa.ocruhoasetnub-");
+            outputResult.innerHTML = hash;
+        })()
+      }
+      
+      function testResult() {
+      	(async () => {
+        	let hash = await getSHA256Hash(inputButton.value.toLowerCase().trim() + "hsa.ocruhoasetnub-");
+            guessResult.innerHTML = (outputResult.innerHTML === hash ? "Guess is correct!" : "Guess is INCORRECT");
+        })()
+      }
+    </script>
+
+  </body>
+</html>
+
